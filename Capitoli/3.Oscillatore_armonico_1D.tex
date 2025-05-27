@@ -1,0 +1,379 @@
+\chapter{Oscillatore armonico 1D}
+
+\begin{esercizio}[(07/10/2020 n°2)]
+   Un oscillatore armonico unidimensionale si trova al tempo $t=0$ nello stato
+   \begin{equation*}
+      \ket*{\psi(0)}=\ket*{3} + i\ket*{4} + \ket*{5}
+   \end{equation*}
+   dove $\ket*{n}$ è il generico autostato dell'Hamiltoniano con autovalore $E_n$ ed $n=0,1,2,\ldots$. Calcolare al tempo $t>0$ il valore medio dell'impulso. Senza fare calcoli aggiuntivi, dedurre il valore medio della posizione allo stesso tempo.
+\end{esercizio}
+\begin{soluzione}
+   Ci sono due modi per ottenere le due quantità richieste dal problema:
+   \begin{itemize}
+      \item O le troviamo nella rappresentazione di Schrödinger, quindi prima facciamo evolvere lo stato (cioè calcoliamo $\ket*{\psi(t)}$) e poi calcoliamo la media rispetto a tale stato, cioè come $\expval*{\hat{p}(t)}=\mel*{\psi(t)}{\hat{p}}{\psi(t)}$ e analogamente per $\hat{x}$;
+      \item Oppure prima facciamo evolvere gli operatori, cioè calcoliamo $\hat{p}(t)$ e $\hat{x}(t)$ nella rappresentazione di Heisenberg e poi li applichiamo allo stato $\ket*{\psi(0)}$ trovando così la media di questi operatori.
+   \end{itemize}
+   \E chiaro che in generale i due modi sono equivalenti, cioè le soluzioni che si ottengono sono le stesse. Tuttavia, mentre per la prima parte dell'esercizio, cioè calcolare $\expval*{\hat{p}(t)}$, i due modi sono esattamente equivalenti, per la seconda parte dell'esercizio, che chiede di ricavare $\expval*{\hat{x}(t)}$ senza fare calcoli aggiuntivi, è necessario che nella prima parte dell'esercizio si debba aver fatto qualcosa che dia $\expval*{\hat{x}(t)}$ automaticamente (o quasi). Alla luce di ciò, svolgeremo i calcoli nella rappresentazione di Schr\"{o}dinger, ma utilizzeremo la rappresentazione di Heisenberg per determinare $\expval*{\hat{x}(t)}$.\\
+   
+   Vediamo innanzitutto in che senso possiamo sfruttare la rappresentazione di Heisenberg per determinare $\expval*{\hat{x}(t)}$. Il motivo è che\footnote{Nota: di fatto viene richiesto che ci si ricordi le relazioni che stiamo per enunciare, altrimenti è chiaro che per ricavarla l'unico modo è svolgere i conti.} utilizzando la rappresentazione di Heisenberg si perviene al risultato
+   \begin{equation*}
+      \expval*{\hat{p}(t)}
+      =A\cos{(\omega t)} + B\sin{(\omega t)}
+   \end{equation*}
+   con $A$ e $B$ costanti. $A$ si ricava calcolando tale relazione per $t=0$, ottenendo immediatamente $A=\expval*{\hat{p}(0)}$; $B$ si ricava dall'equazione di Heisenberg stessa per $\expval*{\hat{p}(t)}$, che ci dice che la derivata rispetto al tempo dell'impulso è pari alla forza elastica, e quindi al tempo $t=0$ avremo
+   \begin{equation*}
+      \eval*{\dv{t}\expval*{\hat{p}(t)}}_{t=0}=-m\omega^2 \expval*{\hat{x}(0)}
+   \end{equation*}
+   Confrontando la derivata dell'espressione di sopra valutata per $t=0$ con la relazione appena scritta si ricava che $B=-m\omega\expval*{\hat{x}(0)}$. In definitiva abbiamo
+   \begin{equation*}
+      \expval*{\hat{p}(t)}
+      =\expval*{\hat{p}(0)}\cos{(\omega t)} - m\omega\expval*{\hat{x}(0)}\sin{(\omega t)}
+   \end{equation*}
+   In maniera del tutto analoga, utilizzando l'equazione di Heisenberg per $\expval*{\hat{x}(t)}$, $\dv{\expval*{\hat{x}(t)}}{t}=\frac{\expval*{\hat{p}(t)}}{m}$, troviamo che
+   \begin{equation*}
+      \expval*{\hat{x}(t)}
+      =\expval*{\hat{x}(0)}\cos{(\omega t)} + \frac{\expval*{\hat{p}(0)}}{m\omega}\sin{(\omega t)}
+   \end{equation*}
+   Pertanto, una volta nota $\expval*{\hat{p}(t)}$ e identificati $\expval*{\hat{p}(0)}$ e $\expval*{\hat{x}(0)}$ con i coefficienti delle funzioni coseno e seno (a meno di eventuali costanti), scrivere $\expval*{\hat{x}(t)}$ sarà immediato.
+   
+   \vspace{0.2cm}
+   Ricordiamo come si ottengono queste relazioni. Nella rappresentazione di Heisenberg, gli operatori sono definiti in questo modo: se abbiamo un certo operatore $\hat{A}$ nella rappresentazione di Schrödinger, ad esso associamo un operatore $\hat{A}_H(t)$ definito come
+   \begin{equation*}
+      \hat{A}_H(t)
+      =e^{i\frac{\hat{\mathcal{H}} t}{\hbar}} \hat{A} e^{-i\frac{\hat{\mathcal{H}} t}{\hbar}}
+   \end{equation*}
+   Attenzione: in questo passaggio stiamo assumendo che $\hat{\mathcal{H}}$ non dipenda dal tempo e che nella rappresentazione di Schrödinger $\hat{A}$ non dipenda dal tempo, altrimenti è necessario adoperare la formula più generale
+   \begin{equation*}
+      \hat{U}^{\dag}(t) \hat{A}(t) \hat{U}(t)
+   \end{equation*}
+   dove $\hat{U}(t)$ è un operatore che si ottiene come soluzione dell'equazione differenziale
+   \begin{equation*}
+      \begin{dcases}
+         i\hbar \dv{\hat{U}}{t}=\hat{\mathcal{H}}\hat{U}\\
+         \hat{U}(0)=\mathbb{1}
+      \end{dcases}
+   \end{equation*}
+   dove 0 è il tempo iniziale $t_0$.
+
+   Nel nostro caso abbiamo gli operatori $\hat{p}_H(t)$ e $\hat{x}_H(t)$ che sono definiti come
+   \begin{equation*}
+      \hat{p}_H(t)=e^{i\frac{\hat{\mathcal{H}} t}{\hbar}} \hat{p} e^{-i\frac{\hat{\mathcal{H}} t}{\hbar}}
+      \qqtext{,}
+      \hat{x}_H(t)=e^{i\frac{\hat{\mathcal{H}} t}{\hbar}} \hat{x} e^{-i\frac{\hat{\mathcal{H}} t}{\hbar}}
+   \end{equation*}
+   Per essi è valida l'equazione di Heisenberg, che per un generico operatore $\hat{A}$ è
+   \begin{equation*}
+      \dv{\hat{A}_H}{t}=\frac{i}{\hbar} \bigl[ \hat{\mathcal{H}}, \hat{A}_H(t) \bigr]
+   \end{equation*}
+   che si ottiene derivando la definizione di operatore nella rappresentazione di Heisenberg:
+   \begin{equation*}
+      \dv{\hat{A}_H(t)}{t}
+      =\frac{i}{\hbar}\hat{\mathcal{H}} \underbrace{e^{i\frac{\hat{\mathcal{H}} t}{\hbar}} \hat{A} e^{-i\frac{\hat{\mathcal{H}} t}{\hbar}}}_{\hat{A}_H(t)}
+      - \frac{i}{\hbar} \underbrace{e^{i\frac{\hat{\mathcal{H}} t}{\hbar}} \hat{A} e^{-i\frac{\hat{\mathcal{H}} t}{\hbar}}}_{\hat{A}_H(t)} \hat{\mathcal{H}}
+      =\frac{i}{\hbar} \bigl( \hat{\mathcal{H}}\hat{A}_H - \hat{A}_H\hat{\mathcal{H}} \bigr)
+      =\frac{i}{\hbar} \big[ \hat{\mathcal{H}}, \hat{A}_H \big]
+   \end{equation*}
+   In particolare per l'operatore $\hat{p}$ avremo (ricordiamo che l'hamiltoniana è quella di un oscillatore armonico)
+   \begin{equation*}
+      \dv{\hat{p}_H}{t}=\frac{i}{\hbar} \qty[ \frac{\hat{p}^2}{2m} + \frac{1}{2} m \omega^2 \hat{x}^2, \hat{p}_H ]
+   \end{equation*}
+   Notiamo però che nel primo membro del commutatore abbiamo gli operatori nella rappresentazione di Schrödinger, nel secondo in quella di Heisenberg. Come facciamo?
+
+   Per prima cosa è necessario osservare che, nel caso in cui l'hamiltoniana non dipenda dal tempo, si ha $\hat{\mathcal{H}}_H(t)=\hat{\mathcal{H}}$ in quanto, poiché $\hat{\mathcal{H}}$ commuta con se stessa, è possibile scrivere
+   \begin{equation*}
+      \hat{\mathcal{H}}_H(t)
+      =e^{i\frac{\hat{\mathcal{H}} t}{\hbar}} \hat{\mathcal{H}} e^{-i\frac{\hat{\mathcal{H}} t}{\hbar}}
+      =\hat{\mathcal{H}}
+   \end{equation*}
+   Sempre grazie al fatto che l'hamiltoniana commuta con l'operatore di evoluzione temporale, è possibile riscrivere l'equazione di Heisenberg come
+   \begin{equation*}
+      \begin{split}
+         \dv{\hat{A}_H}{t}
+         & =\frac{i}{\hbar} \bigl[ \hat{\mathcal{H}}, \hat{A}_H(t) \bigr]
+         \\
+         & =\bigl\{ \hat{\mathcal{H}}\hat{U}^{\dag}\hat{A}\hat{U} - \hat{U}^{\dag}\hat{A}\hat{U}\hat{\mathcal{H}} \bigr\}
+         \\
+         & =\bigl\{ \hat{U}^{\dag}\hat{\mathcal{H}}\hat{A}\hat{U} - \hat{U}^{\dag}\hat{A}\hat{\mathcal{H}}\hat{U} \bigr\}
+         \\
+         & =\frac{i}{\hbar} \hat{U}^{\dag} \bigl[ \hat{\mathcal{H}}, \hat{A} \bigr] \hat{U}
+      \end{split}
+   \end{equation*}
+   Tale passaggio è molto utile perché noi sappiamo calcolare il commutatore tra operatori di Schrödinger ma non quello tra un operatore di Heisenberg e un operatore di Schrödinger. Non è comunque necessario farlo esplicitamente quando svolgiamo i calcoli perché vedremo che $\hat{U}$ e $\hat{U}^{\dag}$ verranno inglobate in altri termini.
+
+   Se applichiamo tale passaggio nel nostro caso si ha
+   \begin{equation*}
+      \dv{\hat{p}_H}{t}
+      =\frac{i}{\hbar} \qty[ \frac{\hat{p}^2}{2m} + \frac{1}{2} m \omega^2 \hat{x}^2, \hat{p}_H ]
+      =\frac{i}{\hbar} \hat{U}^{\dag}\qty[ \frac{\hat{p}^2}{2m} + \frac{1}{2} m \omega^2 \hat{x}^2, \hat{p} ]\hat{U}
+      =\frac{i}{\hbar} \frac{m \omega^2}{2} \hat{U}^{\dag}\qty[ \hat{x}^2, \hat{p} ]\hat{U}
+   \end{equation*}
+   dove nell'ultimo passaggio abbiamo sfruttato il fatto che $\hat{p}^2$ commuta con $\hat{p}$.
+
+   Calcoliamo a parte il commutatore:
+   \begin{equation*}
+      \qty[ \hat{x}^2, \hat{p} ]
+      =\hat{x}\qty[ \hat{x}, \hat{p} ] + \qty[ \hat{x}, \hat{p} ]\hat{x}
+      =2 i\hbar \hat{x}
+   \end{equation*}
+   in quanto $\qty[ \hat{x}, \hat{p} ]=i\hbar$.
+
+   Portando tale risultato nell'espressione abbiamo
+   \begin{equation*}
+      \frac{i}{\hbar} \frac{m \omega^2}{2} \hat{U}^{\dag}\qty[ \hat{x}^2, \hat{p} ]\hat{U}
+      =\frac{i}{\hbar} \frac{m\omega^2}{2} 2 i\hbar \hat{U}^{\dag} \hat{x} \hat{U}
+      =-m\omega^2\hat{x}_H
+   \end{equation*}
+   dove nell'ultimo passaggio abbiamo usato la definizione $\hat{U}^{\dag} \hat{x} \hat{U}=\hat{x}_H$.
+
+   In definitiva la prima equazione di Heisenberg è
+   \begin{equation*}
+      \dv{\hat{p}_H}{t}
+      =-m\omega^2\hat{x}_H
+   \end{equation*}
+   Ci aspettavamo questo risultato? Sì, perché il membro di destra è la forza elastica\footnote{Attenzione! Non è sempre detto che i risultati siano identici al caso classico, perché in meccanica quantistica abbiamo dei commutatori, quindi ci possono essere dei termini di ordine superiore in $\hbar$.}. Tale risultato è dovuto al fatto che abbiamo il commutatore $\qty[ \hat{x}^2, \hat{p} ]$, e siccome $\hat{p}$ è un operatore differenziale rispetto ad $\hat{x}$ abbiamo sostanzialmente calcolato la derivata spaziale del potenziale che è appunto la forza.
+
+   A questo punto calcoliamo $\dv{\hat{x}_H}{t}$. Notiamo che in generale non è necessario farlo, però in questo caso l'equazione di Heisenberg trovata poc'anzi dipende da $\hat{x}_H$, dunque per risolverla dobbiamo conoscere l'evoluzione temporale di $\hat{x}$ e per conoscere quest'ultima dobbiamo calcolare l'equazione di Heisenberg per $\hat{x}$, in modo da poter disaccoppiare le equazioni.
+   \begin{gather*}
+      \dv{\hat{x}_H}{t}
+      =\frac{i}{\hbar} \big[ \hat{\mathcal{H}}, \hat{x}_H \big]
+      =\frac{i}{\hbar} \hat{U}^{\dag} \big[ \hat{\mathcal{H}}, \hat{x} \big] \hat{U}
+      =\frac{i}{\hbar} \hat{U}^{\dag} \qty[ \frac{\hat{p}^2}{2m} + \frac{1}{2} m \omega^2 \hat{x}^2, \hat{x} ] \hat{U}
+      =\frac{i}{2m\hbar} \hat{U}^{\dag}\qty[ \hat{p}^2, \hat{x} ]\hat{U}
+   \end{gather*}
+   Calcoliamo a parte il commutatore:
+   \begin{equation*}
+      \qty[ \hat{p}^2, \hat{x} ]
+      =\hat{p}\qty[ \hat{p}, \hat{x} ] + \qty[ \hat{p}, \hat{x} ]\hat{p}
+      =-2 i\hbar \hat{p}
+   \end{equation*}
+   in quanto $\qty[ \hat{p}, \hat{x}]=-i\hbar$.
+
+   Portando tale risultato nell'espressione
+   \begin{equation*}
+      \frac{i}{2m\hbar} \hat{U}^{\dag}\qty[ \hat{p}^2, \hat{x} ]\hat{U}
+      =-\frac{i}{2m\hbar} 2 i\hbar \hat{U}^{\dag} \hat{p}\hat{U}
+      =\frac{1}{m} \hat{U}^{\dag} \hat{p}\hat{U}
+      =\frac{\hat{p}_H}{m}
+   \end{equation*}
+   in definitiva
+   \begin{equation*}
+      \dv{\hat{x}_H}{t}
+      =\frac{\hat{p}_H}{m}
+   \end{equation*}
+   e tale risultato ce lo aspettavamo con certezza in quanto l'energia potenziale dell'oscillatore armonico non dipende dall'operatore $\hat{p}$. Il motivo è che, mentre prima avevamo il commutatore tra $\hat{p}$ e una generica funzione di $\hat{x}$ (e quindi nell'equazione potevano anche comparire termini non classici di ordine superiore in $\hbar$), se l'energia potenziale non dipende da $\hat{p}$, dato che in meccanica non relativistica l'energia cinetica è $\frac{\hat{p}^2}{2m}$, nell'equazione di Heisenberg per $\hat{x}$ abbiamo sempre e solo solo il commutatore tra $\hat{p}^2$ e $\hat{x}$, che restituisce il risultato di cui sopra.
+   
+   In che casi possiamo avere un potenziale che dipende dall'impulso? Ad esempio quando abbiamo una particella in un campo elettromagnetico. In tal caso in genere avremo un potenziale vettore, ed è quindi possibile che nell'hamiltoniana ci sia un termine del tipo $\vu*{p} \vdot \vu*{A} + \vu*{A} \vdot \vu*{p}$, il quale è un termine di potenziale che dipende dall'impulso.
+   
+   \vspace{0.2cm}Tornando al problema, arrivati a questo punto dobbiamo risolvere le equazioni che abbiamo ricavato:
+   \begin{equation*}
+      \begin{dcases}
+         \dot{\hat{p}}_H
+         =-m\omega^2 \hat{x}_H\\
+         \dot{\hat{x}}_H
+         =\frac{\hat{p}_H}{m}
+      \end{dcases}
+   \end{equation*}
+   le quali costituiscono delle equazioni differenziali del primo ordine accoppiate. Per disaccoppiarle passiamo alle derivate seconde:
+   \begin{equation*}
+      \begin{dcases}
+         \ddot{\hat{p}}_H
+         =-m\omega^2 \dot{\hat{x}}_H
+         =-\omega^2\hat{p}_H\\
+         \ddot{\hat{x}}_H
+         =\frac{\dot{\hat{p}}_H}{m}
+         =-\omega^2\hat{x}_H
+      \end{dcases}
+   \end{equation*}
+   In questo modo abbiamo ottenuto due equazioni differenziali del secondo ordine disaccoppiate. In particolare esse sono nella forma dell'equazione dell'oscillatore armonico, di cui conosciamo bene la soluzione. Attenzione però: in generale è possibile pensare di scrivere la soluzione di tale equazione nella forma
+   \begin{equation*}
+      p(t)=A\cos{(\omega t + \phi)}
+   \end{equation*}
+   Tuttavia non è conveniente adoperare tale espressione per gli operatori del formalismo quantistico, in quanto dovremmo scrivere
+   \begin{equation*}
+      \hat{p}(t)=\hat{A}\cos{(\omega t + \hat{\phi})}
+   \end{equation*}
+   cioè avremmo il coseno di un operatore, il quale è ben definito se espresso come serie infinita di operatori, quindi è preferibile non adoperarla.
+
+   C'è però una forma alternativa, esattamente equivalente alla prima, che è la seguente:
+   \begin{equation*}
+      \hat{p}(t)
+      =\hat{A}\cos{(\omega t)} + \hat{B}\sin{(\omega t)}
+   \end{equation*}
+   Questo discorso vale per gli operatori, se invece scriviamo direttamente la relazione per la media dell'operatore avremo
+   \begin{equation*}
+      \expval*{\hat{p}(t)}
+      =A\cos{(\omega t + \phi)}
+   \end{equation*}
+   ed essendo $A$ e $\phi$ dei numeri non abbiamo problemi ad usarla.
+   
+   Ci si può chiedere perché possiamo passare direttamente dagli operatori alle medie senza problemi. Innanzitutto, chiariamo che se da $\hat{p}(t)$ passiamo a $\expval*{\hat{p}(t)}$ si avrà, per linearità della media rispetto agli operatori,
+   \begin{equation*}
+      \hat{p}(t)
+      =\hat{A}\cos{(\omega t)} + \hat{B}\sin{(\omega t)}
+      \implies
+      \expval*{\hat{p}(t)}
+      =\expval*{\hat{A}}\cos{(\omega t)} + \expval*{\hat{B}}\sin{(\omega t)}
+   \end{equation*}
+   Se invece fossimo passati alla media con un'espressione del primo tipo avremmo avuto
+   \begin{equation*}
+      \hat{p}(t)
+      =\hat{A}\cos{(\omega t + \hat{\phi})}
+      \implies
+      \expval*{\hat{p}(t)}
+      =\expval*{\hat{A}\cos{(\omega t + \hat{\phi})}}
+   \end{equation*}
+   e siccome il coseno di un operatore è un operatore, non avremmo potuto spezzare la media del prodotto di operatori nel prodotto di medie di operatori.
+   
+   Per quanto riguarda l'equazione, possiamo passare direttamente alle medie perché per un generico operatore abbiamo
+   \begin{equation*}
+      \dv{\hat{A}_H(t)}{t}
+      =\frac{i}{\hbar} \big[ \hat{\mathcal{H}}, \hat{A}_H(t) \big]
+   \end{equation*}
+   e se prendiamo la media di entrambi i membri rispetto allo stesso stato arbitrario abbiamo:
+   \begin{equation*}
+      \bigg\langle \dv{\hat{A}_H(t)}{t} \bigg\rangle
+      =\frac{i}{\hbar} \expval*{\big[ \hat{\mathcal{H}}, \hat{A}_H(t) \big]}
+   \end{equation*}
+   ma a sua volta si ha
+   \begin{equation*}
+      \bigg\langle \dv{\hat{A}_H(t)}{t} \bigg\rangle
+      =\dv{t} \expval*{\hat{A}_H(t)}
+   \end{equation*}
+   cioè l'operazione di derivazione rispetto al tempo può essere portato sotto il segno di media. Perché questa cosa? Il motivo è che nella rappresentazione di Heisenberg la media è definita come
+   \begin{equation*}
+      \expval*{\hat{A}_H(t)}=\mel*{\psi(0)}{\hat{A}_H(t)}{\psi(0)}
+   \end{equation*}
+   Siccome gli stati non dipendono dal tempo, se in quest'ultima relazione deriviamo ambo i membri possiamo scrivere
+   \begin{equation*}
+      \dv{t} \expval*{\hat{A}_H(t)}
+      =\mel*{\psi(0)}{\dv{t} \hat{A}_H(t)}{\psi(0)}=\bigg\langle \dv{\hat{A}_H(t)}{t} \bigg\rangle
+   \end{equation*}
+      Attenzione! \E chiaro che poi nei fatti dobbiamo prima calcolare il commutatore. Ad esempio nel nostro problema abbiamo
+   \begin{equation*}
+      \dv{t} \expval*{\hat{p}_H}=-m\omega^2 \expval*{\hat{x}_H}
+      \qqtext{,}
+      \dv{t} \expval*{\hat{x}_H}=\frac{\expval*{\hat{p}_H}}{m}
+   \end{equation*}
+   
+   Quindi cosa abbiamo trovato? Siccome queste sono delle equazioni lineari, e la media è lineare rispetto ad uno somma di operatori, allora le medie hanno le stesse identiche equazioni degli operatori, dunque la forma delle soluzioni è la stessa.
+   
+   A questo punto dobbiamo determinare gli operatori $\hat{A}$ e $\hat{B}$, o equivalentemente i coefficienti $\expval*{\hat{A}}$ e $\expval*{\hat{B}}$. Per determinarli calcoliamo ambo i membri per certi valori di $t$ e vediamo cosa risulta. Ad esempio, calcoliamo questi operatori per $t=0$: si ha
+   \begin{equation*}
+      \hat{p}_H(0)
+      =\hat{A}
+   \end{equation*}
+   Per determinare $\hat{B}$ calcoliamo la derivata e poi la valutiamo al tempo $t=0$. La derivata è
+   \begin{equation*}
+      \dot{\hat{p}}_H(t)=-\omega\hat{A}\sin{(\omega t)} + \omega\hat{B}\cos{(\omega t)}
+   \end{equation*}
+   che per $t=0$ ci dà
+   \begin{equation*}
+      \dot{\hat{p}}_H(0)=\omega\hat{B}
+   \end{equation*}
+   Perché abbiamo calcolato la derivata prima? Perché l'equazione di Heisenberg iniziale non era un'equazione alle derivate seconde, bensì alla derivata prima; per $\hat{p}_H(t)$ essa era $\dot{\hat{p}}_H(t)=-m\omega^2 \hat{x}_H(t)$. Se quindi ora inseriamo nel membro sinistro questa relazione (che deve essere valida per ogni $t$, quindi in particolare per $t=0$), avremo
+   \begin{equation*}
+      -m\omega^2 \hat{x}_H(0)=\omega\hat{B}
+      \implies
+      \hat{B}=-m\omega \hat{x}_H(0)
+   \end{equation*}
+   In definitiva abbiamo trovato che
+   \begin{equation*}
+      \hat{p}_H(t)
+      =\hat{p}_H(0)\cos{(\omega t)} - m\omega\hat{x}_H(0)\sin{(\omega t)}
+   \end{equation*}
+   relazione che passando alle medie diventa
+   \begin{equation*}
+      \expval*{\hat{p}(t)}
+      =\expval*{\hat{p}(0)}\cos{(\omega t)} - m\omega\expval*{\hat{x}(0)}\sin{(\omega t)}
+   \end{equation*}
+   Operando in maniera del tutto analoga per $\hat{x}_H(t)$ troviamo
+   \begin{equation*}
+      \expval*{\hat{x}(t)}
+      =\expval*{\hat{x}(0)}\cos{(\omega t)} + \frac{\expval*{\hat{p}(0)}}{m\omega}\sin{(\omega t)}
+   \end{equation*}
+   Questi sono i risultati enunciati a inizio esercizio.\\
+
+   Svolgiamo quindi il calcolo nella rappresentazione di Schrödinger. Innanzitutto dobbiamo trovare $\ket*{\psi(t)}$, il che significa che dobbiamo applicare l'operatore di evoluzione temporale. Prima però dobbiamo ricavare la costante di normalizzazione, che è importante perché se dobbiamo trovare delle medie gli stati devono essere normalizzati. Scriviamo lo stato come
+   \begin{equation*}
+      \ket*{\psi(0)}=N \bigl( \ket*{3} + i\ket*{4} + \ket*{5} \bigr)
+   \end{equation*}
+   e imponiamo che sia normalizzato:
+   \begin{equation*}
+      1
+      =\braket*{\psi(0)}
+      =|N|^2 \cdot 3
+      \implies
+      N=\frac{1}{\sqrt{3}}
+   \end{equation*}
+   L'evoluto temporale sarà dunque
+   \begin{equation*}
+      \ket*{\psi(t)}=\frac{1}{\sqrt{3}} e^{-i\frac{\hat{\mathcal{H}} t}{\hbar}} \bigl( \ket*{3} + i\ket*{4} + \ket*{5} \bigr)
+   \end{equation*}
+   Nota: se avessimo voluto fare il calcolo nella rappresentazione di Heisenberg, il passaggio dell'evoluzione temporale dello stato lo avremmo saltato perché in tale rappresentazione lavoriamo con stati al tempo $t=0$. Avremmo dovuto invece calcolare le medie degli operatori solo al tempo $t=0$, per poi utilizzarle nelle espressioni trovate in precedenza per gli operatori ad un generico tempo $t$.
+   
+   Notiamo che tra parentesi abbiamo una somma di autostati e l'operatore di evoluzione temporale è lineare, quindi l'applicazione dell'operatore alla somma è uguale alla somma degli stati su cui è stato applicato l'operatore. In particolare, dato che nella somma figurano solo autostati dell'hamiltoniana avremo\footnote{Ricordiamo che l'esponenziale di un operatore è definito come la sua serie di Taylor, per cui se lo applichiamo ad un autostato avremo
+   \begin{equation*}
+      e^{\hat{A}}
+      =\sum_{n=0}^{\infty}\frac{\hat{A}^n}{n!}
+   \implies
+      e^{\hat{A}} \ket*{a}
+      =\sum_{n=0}^{\infty}\frac{\hat{A}^n \ket*{a}}{n!}
+      =\sum_{n=0}^{\infty}\frac{a^n \ket*{a}}{n!}
+      =e^a \ket*{a}
+   \end{equation*}
+   cioè l'applicazione dell'esponenziale di un operatore ad un autostato del medesimo operatore restituisce l'esponenziale dell'autovalore.}
+   \begin{equation*}
+      \ket*{\psi(t)}=\frac{1}{\sqrt{3}} \qty( e^{-i\frac{E_3 t}{\hbar}}\ket*{3} + i e^{-i\frac{E_4 t}{\hbar}} \ket*{4} + e^{-i\frac{E_5 t}{\hbar}} \ket*{5} )
+   \end{equation*}
+   Possiamo semplificare tale stato portando un fattore $e^{-i\frac{E_3 t}{\hbar}}$ a moltiplicare, per cui negli altri esponenziali figureranno rispettivamente dei termini $E_4 - E_3=\hbar\omega$ ed $E_5 - E_3=2\hbar\omega$, quindi
+   \begin{equation*}
+      \ket*{\psi(t)}=\frac{1}{\sqrt{3}} e^{-i\frac{E_3 t}{\hbar}} \qty( \ket*{3} + i e^{-i\omega t} \ket*{4} + e^{-i2\omega t} \ket*{5} )
+   \end{equation*}
+   A questo punto dobbiamo calcolare $\expval*{\hat{p}(t)}$, che nella rappresentazione di Schrödinger si calcola come
+   \begin{equation*}
+      \expval*{\hat{p}(t)}
+      =\mel*{\psi(t)}{\hat{p}}{\psi(t)}
+   \end{equation*}
+   Notiamo che, poiché appare sia lo stato che il suo complesso coniugato, la fase messa in evidenza si cancellerà con il suo coniugato, dunque possiamo ometterla sin da subito. Inoltre prima di svolgere il calcolo facciamo il seguente ragionamento: l'operatore impulso lo scriviamo, visto che stiamo agendo sugli autostati dell'oscillatore armonico, nella rappresentazione degli operatori di creazione e di annichilazione, cioè come
+   \begin{equation*}
+      \hat{p}
+      =-i\sqrt{\frac{m \hbar \omega}{2}}\bigl(a - a^{\dag}\bigr)
+   \end{equation*}
+   e applichiamo tale espressione allo stato di destra. Dopo aver fatto ciò, scartiamo gli elementi che danno contributo non nullo, cioè tutti gli stati che vengono fuori dall'applicazione di $a$ o $a^{\dag}$ su $\ket*{\psi(t)}$ ma che non compaiono a sinistra (ad esempio $a\ket*{3}=\sqrt{3}\ket*{2}$, ma tale stato non appare a sinistra quindi lo scartiamo)
+   \begin{equation*}
+      \begin{split}
+         \expval*{\hat{p}(t)}
+         & =-\frac{i}{3} \sqrt{\frac{m \hbar \omega}{2}}
+         \qty( \bra*{3} - i e^{i\omega t} \bra*{4} + e^{i2\omega t} \bra*{5})
+         \bigl( a - a^{\dag} \bigr)
+         \qty( \ket*{3} + i e^{-i\omega t} \ket*{4} + e^{-i2\omega t} \ket*{5})
+         \\
+         & =-\frac{i}{3} \sqrt{\frac{m \hbar \omega}{2}}
+         \qty( \bra*{3} - i e^{i\omega t} \bra*{4} + e^{i2\omega t} \bra*{5}) \cdot
+         \\
+         & \quad \cdot \bigl( i e^{-i\omega t} \sqrt{4} \ket*{3} + e^{-i2\omega t} \sqrt{5} \ket*{4} - \sqrt{4}\ket*{4} - i e^{-i\omega t} \sqrt{5} \ket*{5} \bigr)
+      \end{split}
+   \end{equation*}
+   \E da notare che, dovendo essere la media reale ed essendoci un fattore $i$ a moltiplicare, ci aspettiamo che l'espressione tra parentesi sia immaginaria pura.
+
+   Svolgendo il calcolo in conclusione si ha
+   \begin{equation*}
+      \begin{split}
+         \expval*{\hat{p}(t)}
+         & =-\frac{i}{3} \sqrt{\frac{m \hbar \omega}{2}} \qty( i e^{-i\omega t} \sqrt{4} - i e^{-i\omega t} \sqrt{5} + i e^{i\omega t} \sqrt{4} - i e^{-i\omega t} \sqrt{5})
+         \\
+         & =-\frac{i}{3} \sqrt{\frac{m \hbar \omega}{2}} i \bigl( \sqrt{4} - \sqrt{5} \bigr) \qty( e^{i\omega t} + e^{-i\omega t} )
+         \\
+         & =\frac{2}{3} \sqrt{\frac{m \hbar \omega}{2}} \bigl( \sqrt{4} - \sqrt{5} \bigr) \cos{(\omega t)}
+      \end{split}
+   \end{equation*}
+   Per la seconda parte dell'esercizio si confrontano le espressioni ottenute per $\expval*{\hat{p}(t)}$ nelle due rappresentazioni. Affinché le due espressioni siano uguali, si deve avere $\expval*{\hat{x}(0)}=0$, in quanto non compare il seno, e banalmente
+   \begin{equation*}
+      \expval*{\hat{p}(0)}
+      =\frac{2}{3} \sqrt{\frac{m \hbar \omega}{2}} \bigl( \sqrt{4} - \sqrt{5} \bigr)
+   \end{equation*}
+   Pertanto
+   \begin{equation*}
+      \expval*{\hat{x}(t)}=\frac{2}{3} \sqrt{\frac{\hbar}{2m\omega}} \bigl( \sqrt{4} - \sqrt{5} \bigr) \sin{(\omega t)}
+   \end{equation*}
+\end{soluzione}
