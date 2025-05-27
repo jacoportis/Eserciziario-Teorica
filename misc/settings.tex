@@ -1,0 +1,89 @@
+%=================%
+%   PAGE LAYOUT   %
+%=================%
+
+\settypeblocksize{*}{1.2\lxvchars}{*}   % lxvchars è una dimensione raccomandata che dipende dal font, utile per la leggibilità
+\setlrmargins{*}{*}{1}                  % setta i margini in modo che siano 1:1 adeguandosi al typeblock
+\setulmarginsandblock{1.5in}{*}{1.4}    % setta i margini superiore e inferiore {superiore}{inferiore}{rapporto}
+\checkandfixthelayout                   % does the magic
+
+
+
+%=========================%
+%   HEADER & PAGESTYLES   %
+%=========================%
+
+\setlength{\headwidth}{\textwidth}
+
+\makepagestyle{thesis}                                                     % definisce il nome dello stile
+\makerunningwidth{thesis}{\headwidth}                                      % definisce la lunghezza dell'header
+\makeheadrule{thesis}{\headwidth}{\normalrulethickness}                    % mette la riga nell'header
+\makeheadposition{thesis}{flushright}{flushleft}{flushright}{flushleft}    % definisce la posizione dell'header
+\makepsmarks{thesis}{%                                                     % da qui in poi non lo so
+  \nouppercaseheads
+  \createmark{chapter}{both}{shownumber}{\chaptername\ }{.\ } 
+  \createmark{section}{right}{shownumber}{}{.\ }              
+  \createplainmark{toc}{both}{\contentsname}                  
+  \createplainmark{lof}{both}{\listfigurename}                
+  \createplainmark{lot}{both}{\listtablename}
+  \createplainmark{bib}{both}{\bibname}
+  \createplainmark{index}{both}{\indexname}
+  \createplainmark{glossary}{both}{\glossaryname}    
+}
+
+%% se oneside:
+  % \makeoddhead{thesis}{\bfseries\leftmark}{}{\bfseries\thepage}
+%% se twoside:
+  \makeevenhead{thesis}{\bfseries\thepage}{}{\bfseries\leftmark}
+  \makeoddhead{thesis}{\bfseries\rightmark}{}{\bfseries}
+
+\aliaspagestyle{chapter}{empty}
+\chapterstyle{hangnum}
+
+
+%===============%
+%   NUMBERING   %
+%===============%
+
+\numberwithin{equation}{chapter}    % Aggiunge il numero del capitolo all'equazione
+\setsecnumdepth{subsection}         % numera le subsection (1.1.1)
+
+\hypersetup{                    % ======================================
+    colorlinks=true,            % template preso da internet
+    linkcolor=black,            % molto sobrio, le cose cliccabili si evidenziano quando passi il mouse
+    filecolor=black,            %
+    urlcolor=blue,              %
+    pdfpagemode=FullScreen,     %
+    citecolor=black,            %
+}
+
+
+
+\setlength\parindent{0pt}%e si gode, toglie lo spostamento a destra di una nuova riga
+%
+%   TIKZ
+%
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{positioning}
+
+
+
+%
+%   ALTRO / COMANDI / MISCELLANEA
+%
+
+\newcommand\myline[1][]{%
+  \,\tikz[baseline]\draw[very thick,#1](0,-\dp\strutbox)--(0,\ht\strutbox);\,%
+}
+
+\newcommand{\E}{È}
+
+\makeatletter
+\newcommand\mathcircled[1]{%
+  \mathpalette\@mathcircled{#1}%
+}
+\newcommand\@mathcircled[2]{%
+  \tikz[baseline=(math.base)] \node[draw,ellipse,inner sep=1pt] (math) {$\m@th#1#2$};%
+}
+\makeatother

@@ -1,136 +1,71 @@
-\documentclass[12pt]{book}%openany toglie la pagine bianche tra i capitoli
-
-% Language setting
-% Replace `english' with e.g. `spanish' to change the document language
+\documentclass[12pt, a4paper, final, twoside, openright]{memoir}%openany toglie la pagine bianche tra i capitoli
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage[italian]{babel}
-\newcommand{\E}{È \hspace{0.1mm}}
-\usepackage{import}
-% Set page size and margins
-% Replace `letterpaper' with `a4paper' for UK/EU standard size
-\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{geometry}
+
 
 \usepackage{amssymb} % for harpoons
-% Useful packages
-\usepackage[utf8]{inputenc}
-\usepackage{afterpage}
-\newcommand\blankpage{%
-    \null
-    \thispagestyle{empty}%
-    \newpage}
+% Useful package
 \usepackage{amsmath}
 \usepackage{graphicx}
-\usepackage[psdextra, colorlinks=true, allcolors=black]{hyperref}
-\usepackage{array}% only needed for injecting commands at the beginning of columns in the tabular below
-\usepackage{ambienti} %per gli esercizi
+\usepackage{hyperref}
+\usepackage{array}    % only needed for injecting commands at the beginning of columns in the tabular below
+\usepackage{ambienti} % per gli esercizi
 \usepackage[version=4]{mhchem}
 
-\newcommand\myline[1][]{%
-  \,\tikz[baseline]\draw[very thick,#1](0,-\dp\strutbox)--(0,\ht\strutbox);\,%
-}
+
 \usepackage{enumitem}
 \usepackage{float}
 \usepackage{mathtools}
 \usepackage{tikz}
-\usetikzlibrary {shapes.geometric}
-\usetikzlibrary{decorations.markings}
-\usetikzlibrary{positioning}
+
 \usepackage{lipsum}
 \usepackage{chemfig}
 \usepackage{amsmath}
 \usepackage{array}
-\setlength\parindent{0pt}%e si gode, toglie lo spostamento a destra di una nuova riga
+
 \usepackage{textgreek}
 \usepackage[open]{bookmark}
 \ProvidesFile{puenc-greek.def}
-%\input{puenc-greekbasic.def}
 \usepackage{caption}
 \usepackage{float}
 
-\makeatletter
-\newcommand\mathcircled[1]{%
-  \mathpalette\@mathcircled{#1}%
-}
-\newcommand\@mathcircled[2]{%
-  \tikz[baseline=(math.base)] \node[draw,ellipse,inner sep=1pt] (math) {$\m@th#1#2$};%
-}
-\makeatother
-
-%impaginazione
-\usepackage{fancyhdr}
-
+\input{misc/settings.tex}
 \begin{document}
+  \input{misc/title.tex}
+  \pagestyle{thesis}
+  \frontmatter
+    \tableofcontents
 
-\thispagestyle{empty}
-\begin{center}
+  \mainmatter
+    \input{Capitoli/1.tex}
 
-\begin{minipage}[c]{0.45\textwidth}
-\begin{flushleft}
-\includegraphics[width=0.8\textwidth]{logo-unict-orizzontale-grigio.png}
-\end{flushleft}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.45\textwidth}
-\begin{flushright}
-\includegraphics[width=\textwidth]{logo_dfa_orizzontale}
-\end{flushright}
-\end{minipage}\\
-\medskip
-\hbox to \textwidth{\hrulefill}
-
-\vfill
-\vfill
-
-\uppercase{\sc{ \Large{\textbf{Esercizi svolti di Fisica Teorica}}}}\\
-
-\vfill
-\large{A cura di P. Salumieri}
-
-\vfill
-\vfill
-\hbox to \textwidth{\hrulefill}
-{\sc anno 2025}
-\end{center}
-
-\afterpage{\blankpage}
-\newpage
-
-\thispagestyle{empty}
-
-
-\afterpage{\blankpage}
-
-%\frontmatter
-
-\clearpage                       % Otherwise \pagestyle affects the previous page.
-{                                % Enclosed in braces so that re-definition is temporary.
-  \pagestyle{empty}              % Removes numbers from middle pages.
-  \fancypagestyle{plain}         % Re-definition removes numbers from first page.
-  {
-    \fancyhf{}%                       % Clear all header and footer fields.
-    \renewcommand{\headrulewidth}{0pt}% Clear rules (remove these two lines if not desired).
-    \renewcommand{\footrulewidth}{0pt}%
-  }
-  \tableofcontents
-  \thispagestyle{empty}          % Removes numbers from last page.
-} %roba per mettere l'indice senza numero di pagina ne marks
-
-\newpage
-
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[LE]{\nouppercase{\textbf{\thepage}\hfill\leftmark}}
-\fancyhead[RO]{\nouppercase{\rightmark\hfill\textbf{\thepage}}}
-\fancypagestyle{plain}{%
-\fancyhf{} % cancella tutti i campi di intestazione e pi\‘e di pagina
-%\fancyfoot[C]{\bfseries \thepage} % tranne il centro
-\renewcommand{\headrulewidth}{0pt}
-}
+% {                                % Enclosed in braces so that re-definition is temporary.
+%   \pagestyle{empty}              % Removes numbers from middle pages.
+%   \fancypagestyle{plain}         % Re-definition removes numbers from first page.
+%   {
+%     \fancyhf{}%                       % Clear all header and footer fields.
+%     \renewcommand{\headrulewidth}{0pt}% Clear rules (remove these two lines if not desired).
+%     \renewcommand{\footrulewidth}{0pt}%
+%   }
+%   \tableofcontents
+%   \thispagestyle{empty}          % Removes numbers from last page.
+% } %roba per mettere l'indice senza numero di pagina ne marks
+% 
+% \newpage
+% 
+% \pagestyle{fancy}
+% \fancyhf{}
+% \fancyhead[LE]{\nouppercase{\textbf{\thepage}\hfill\leftmark}}
+% \fancyhead[RO]{\nouppercase{\rightmark\hfill\textbf{\thepage}}}
+% \fancypagestyle{plain}{%
+% \fancyhf{} % cancella tutti i campi di intestazione e pi\‘e di pagina
+% %\fancyfoot[C]{\bfseries \thepage} % tranne il centro
+% \renewcommand{\headrulewidth}{0pt}
+% }
 
 %\tableofcontents
 
-\thispagestyle{empty}
-
-\chapter{Esercizi di Fisica Teorica}
-\input{Capitoli/1.tex}
 
 \end{document}
